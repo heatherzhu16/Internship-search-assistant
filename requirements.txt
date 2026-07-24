@@ -1,0 +1,8 @@
+streamlit>=1.50
+openai>=1.68
+pydantic>=2.7
+python-dotenv>=1.0
+pypdf>=5.0
+python-docx>=1.1
+pandas>=2.2
+openpyxl>=3.1
