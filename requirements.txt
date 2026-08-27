@@ -1,4 +1,4 @@
-streamlit>=1.60
+streamlit==1.60
 openai>=1.68
 pydantic>=2.7
 python-dotenv>=1.0
