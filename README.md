@@ -1,113 +1,250 @@
-# 实习求职助手
+<div align="center">
 
-一个基于 Streamlit 和 DeepSeek API 的个人求职工作台，覆盖岗位分析、定向求职材料、投递管理和求职复盘。
+<img src="static/career_os_logo.svg" width="196" alt="JobCraft logo">
 
-## 功能
+# JobCraft
 
-### 第一阶段：岗位分析
+### A local-first internship search and decision workspace
 
-- 读取 PDF、DOCX、TXT 简历
-- 提取并整理岗位 JD
-- 根据六个维度进行匹配评分
-- 判断硬性条件、优势、风险和缺失关键词
-- 保存岗位到投递台账并导出 Excel
+Turn job posts, resumes, application history, and personal constraints into an evidence-backed decision trail — without automating away the human decision.
 
-### 第二阶段：求职辅助
+[English](README.md) · [简体中文](README.zh-CN.md)
 
-- 针对具体岗位生成简历修改建议
-- 展示简历原文和建议版本对比
-- 生成中文求职邮件
-- 生成英文求职邮件
-- 生成 BOSS 直聘首次私信短版
-- 通过文本框右上角按钮一键复制
+![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.60%2B-FF4B4B?logo=streamlit&logoColor=white)
+![Storage](https://img.shields.io/badge/Storage-Local--first-191916)
+![Platform](https://img.shields.io/badge/Best%20on-macOS-000000?logo=apple&logoColor=white)
 
-所有改写都被要求基于简历中的真实经历，不得虚构项目、技能、成果或数字。
+</div>
 
-### 第三阶段：复盘与展示
+> [!IMPORTANT]
+> JobCraft is a decision-support tool, not an auto-apply bot. It does not bypass logins, CAPTCHAs, or anti-automation controls, and it never applies or messages recruiters on your behalf.
 
-- 投递漏斗
-- 不同公司类型的投递数量
-- 面试转化率与 Offer 转化率
-- 待跟进提醒
-- 不同简历版本的效果比较
-- 动态演示数据
-- 可编辑投递台账
+## Why JobCraft?
 
-## 统计口径
+Most job-search tools optimize for **more applications**. JobCraft optimizes for **better, explainable decisions**.
 
-- **已投递**：最高进展达到“已投递”及以上。
-- **进入面试**：最高进展达到“一面”及以上。
-- **面试转化率**：进入过面试的岗位数 ÷ 已投递岗位数。
-- **Offer 转化率**：获得 Offer 的岗位数 ÷ 已投递岗位数。
-- **最高进展**：记录一次投递曾经到达的最高阶段。即使当前状态变为“拒绝”，也应保留真实的最高进展，以免漏斗数据失真。
-- **简历版本效果**：按简历版本比较投递数、面试数、Offer 数和对应转化率。少于 5 次投递的版本仅供参考。
+It separates four questions that are often mixed together:
 
-## 本地运行
+1. **Eligibility** — Do you meet the hard requirements?
+2. **Capability fit** — What resume evidence matches the role?
+3. **Personal preference** — Does the opportunity fit your goals?
+4. **Information quality** — Is the job description complete enough to judge?
 
-### 1. 创建环境并安装依赖
+Only a complete, valid job description can receive a formal score. The model provides evidence and suggestions; you make the final call.
+
+## How it works
+
+```mermaid
+flowchart LR
+    A[Job post] --> B[Manual input or Chrome capture]
+    B --> C{Information complete?}
+    C -- No --> D[Request missing details]
+    C -- Yes --> E[Eligibility checks]
+    E --> F[Evidence-based fit]
+    F --> G[Personal preferences]
+    G --> H[Human decision]
+    H --> I[Application ledger]
+    I --> J[Email sync and review]
+    J --> K[Evaluation and calibration]
+```
+
+## Key features
+
+### Job discovery and capture
+
+- Generate platform-specific search terms and open searches in Google Chrome.
+- Capture a job page you are actively viewing with the bundled Chrome extension.
+- Support Xiaohongshu, BOSS Zhipin, and Shixiseng workflows.
+- Preserve source links, visible page content, screenshots, and your initial judgment.
+- Detect duplicate, expired, withdrawn, image-only, and incomplete listings.
+
+### Evidence-based job analysis
+
+- Upload PDF, DOCX, or TXT resumes.
+- Extract responsibilities, requirements, application contacts, and eligibility constraints.
+- Score six capability dimensions using explicit evidence levels.
+- Require every positive score to explain `resume fact → job requirement`.
+- Keep hard constraints separate from professional fit.
+- Save the resume version, profile version, job description, rules, inputs, and outputs used for each analysis.
+
+### Application materials
+
+- Generate role-specific resume revision suggestions.
+- Draft Chinese and English application emails.
+- Draft short first-contact messages for BOSS Zhipin.
+- Keep generated content grounded in the source resume — no invented projects, skills, metrics, or experience.
+
+### Application ledger and review
+
+- Track application status, next follow-up date, source, resume version, and notes.
+- Append status events instead of overwriting history.
+- Preserve the highest stage reached even after a rejection.
+- Review application, interview, and offer conversion rates.
+- Compare outcomes across resume versions.
+- Export the application ledger to Excel.
+
+### Optional 163 Mail sync
+
+- Read selected Sent and incoming folders without moving or deleting messages.
+- Detect application confirmations, assessments, interviews, rejections, and offers.
+- Keep every detected update pending until you confirm it.
+- Create a draft email with the selected resume attached; sending remains manual.
+- Store authorization codes in macOS Keychain instead of the database.
+
+### Quality evaluation
+
+- Maintain a personal evaluation set for regression checks.
+- Measure score-range agreement, eligibility accuracy, gap recall, ranking consistency, and repeat stability.
+- Reject placeholder, evidence-free, or structurally invalid model output.
+- Keep universal quality rules separate from personal preference calibration.
+
+## Quick start
+
+### Prerequisites
+
+- Python 3.12 or later recommended
+- Google Chrome for search launching and the capture extension
+- A DeepSeek API key for AI-assisted analysis and material generation
+- macOS for Keychain storage and the built-in Chrome launcher
+
+Core data management remains local. Features that explicitly use the model require network access and may incur API charges.
+
+### 1. Clone the repository
 
 ```bash
-python -m venv .venv
+git clone https://github.com/heatherzhu16/Internship-search-assistant.git
+cd Internship-search-assistant
+```
+
+### 2. Create a virtual environment
+
+```bash
+python3 -m venv .venv
 source .venv/bin/activate
+```
+
+On Windows, activate it with:
+
+```powershell
+.venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 2. 配置 DeepSeek
-
-复制示例环境变量文件：
+### 4. Configure DeepSeek
 
 ```bash
 cp .env.example .env
 ```
 
-编辑 `.env`：
+Edit `.env`:
 
 ```dotenv
-DEEPSEEK_API_KEY=你的_API_Key
-DEEPSEEK_MODEL=deepseek-v4-flash
+DEEPSEEK_API_KEY=your_api_key
+DEEPSEEK_MODEL=deepseek-chat
 ```
 
-`.env` 已被 `.gitignore` 排除，不要把真实密钥提交到代码仓库。
+On macOS, you can instead enter the key in JobCraft and save it to Keychain.
 
-### 3. 启动
+### 5. Run JobCraft
 
 ```bash
-streamlit run app.py
+streamlit run streamlit_app.py
 ```
 
-然后访问 `http://localhost:8501`。
+Open [http://localhost:8501](http://localhost:8501). The local SQLite database and required data directories are created automatically.
 
-## 推荐使用流程
+## Chrome extension setup
 
-1. 在“岗位分析”上传简历并粘贴 JD。
-2. 检查结构化 JD，完成六维评分。
-3. 填写投递状态、简历版本和下次跟进日期，保存到台账。
-4. 在“求职材料”生成并复制定向材料。
-5. 后续在“投递台账”更新状态、最高进展和跟进日期。
-6. 在“复盘看板”观察转化率和简历版本效果。
+1. Start JobCraft.
+2. Open `chrome://extensions` in Google Chrome.
+3. Enable **Developer mode**.
+4. Select **Load unpacked** and choose `browser_extension/`.
+5. In JobCraft, open the job-capture setup area and copy the local pairing token.
+6. Save the token in the extension.
+7. Open a supported job page and capture it intentionally from the extension popup.
 
-## 演示数据
+The extension only reads the page you explicitly choose to capture. It does not search, apply, greet recruiters, send messages, like, bookmark, or comment for you.
 
-在“复盘看板”的数据范围中选择“仅演示数据”或“真实 + 演示”，即可查看完整效果。
+## Recommended workflow
 
-[demo_data.csv](demo_data.csv) 使用相对日期：应用会以打开当天为基准动态生成投递日期和跟进日期。演示数据不会写入 `job_search.db`，也不会污染真实台账。
+1. Upload a resume and set a default version.
+2. Complete your candidate profile and availability constraints.
+3. Capture a job page or paste a complete job description.
+4. Review the extracted structure and correct any missing or inaccurate fields.
+5. Run the evidence-based analysis and inspect each reason.
+6. Record your own decision: prepare to apply, learn more, skip, or request more information.
+7. Generate materials, review them manually, and apply outside JobCraft.
+8. Update the ledger or confirm detected email events.
+9. Use the dashboard and evaluation set to improve future decisions.
 
-## 数据与隐私
+## Data and privacy
 
-- 上传的简历由 Streamlit 在当前会话中读取。
-- 简历文本和 JD 会发送给配置的 DeepSeek API 用于分析和生成材料。
-- 应用不会把简历原文写入本地数据库。
-- 投递台账、JD 和评分结果保存在本地 `job_search.db`。
-- `job_search.db`、`.env` 和虚拟环境默认不会提交到 Git。
+| Data | Local path | Committed to Git |
+|---|---|---|
+| Application database | `job_search.db` | No |
+| Resume files | `data/resumes/` | No |
+| Browser profiles and sessions | `data/browser_profiles/` | No |
+| Captured job screenshots | `data/discovery_snapshots/` | No |
+| Evaluation cases and reports | `data/evaluation_cases/`, `data/evaluation_reports/` | No |
+| Browser pairing token | `data/browser_capture_token.txt` | No |
+| API and mail credentials | `.env` or macOS Keychain | No |
+| Anonymous demo data | `demo_data.csv` | Yes |
 
-## 项目结构
+Resume text, the current job description, and relevant confirmed profile fields are sent to the configured DeepSeek API when you request AI analysis. Review the provider's privacy policy before using real personal data.
+
+> [!WARNING]
+> Never commit `.env`, `job_search.db`, resumes, browser profiles, screenshots, evaluation reports, or email credentials. The included `.gitignore` excludes these paths by default, but always inspect the staged file list before publishing.
+
+## Project structure
 
 ```text
 .
-├── app.py              # Streamlit 应用
-├── demo_data.csv       # 第三阶段演示数据
-├── job_search.db       # 本地投递数据，不提交 Git
-├── requirements.txt    # Python 依赖
-├── .env.example        # 环境变量示例
-└── README.md           # 项目说明
+├── streamlit_app.py       # Streamlit entry point and navigation
+├── app_pages/             # Analysis, materials, ledger, dashboard, and settings pages
+├── services/              # Database, scoring, email, resume, and discovery services
+├── models/                # Application, resume, discovery, email, and evaluation models
+├── browser_extension/     # Local Chrome capture extension
+├── static/                # Product logo and icon
+├── tests/                 # Automated tests
+├── docs/                  # Design and implementation notes
+├── demo_data.csv          # Anonymous dashboard demo data
+├── requirements.txt       # Runtime dependencies
+└── .env.example           # Configuration template
 ```
+
+## Run tests
+
+`pytest` is kept outside the runtime dependency list. Install it when contributing:
+
+```bash
+pip install pytest
+pytest -q
+```
+
+## Current limitations
+
+- The interface and domain rules currently focus on Chinese internship recruiting.
+- Keychain storage and direct Chrome launching are macOS-specific.
+- Platform page structures can change and may require capture-rule updates.
+- Image-only job descriptions must be transcribed or supplemented before formal scoring.
+- Model output is advisory and can be incomplete or incorrect; review it before acting.
+
+## Contributing
+
+Issues and pull requests are welcome. When contributing:
+
+- Never include real resumes, job records, email addresses, credentials, or browser data.
+- Add or update tests when changing scoring, eligibility, or data-quality rules.
+- Preserve the separation between model suggestions and deterministic local rules.
+- Do not add auto-apply behavior or features that bypass platform controls.
+
+## Responsible use
+
+JobCraft is an independent personal project and is not affiliated with Xiaohongshu, BOSS Zhipin, Shixiseng, 163 Mail, DeepSeek, or any employer. Users are responsible for complying with platform terms, local laws, and the privacy expectations of all parties whose data they process.

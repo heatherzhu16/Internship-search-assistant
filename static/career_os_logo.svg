@@ -1,0 +1,7 @@
+<svg width="196" height="40" viewBox="0 0 196 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="38" height="38" rx="10" fill="#191916"/>
+  <path d="M13 11.5V24.25C13 28.53 15.47 31 19.75 31C24.03 31 26.5 28.53 26.5 24.25V19" stroke="#F4F1EA" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="29.5" cy="10.5" r="3.5" fill="#C84B31"/>
+  <text x="52" y="22" fill="#191916" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="700" letter-spacing="-0.5">JobCraft</text>
+  <text x="53" y="34" fill="#777168" font-family="Inter, -apple-system, sans-serif" font-size="7.5" font-weight="600" letter-spacing="1.55">PERSONAL CAREER OS</text>
+</svg>

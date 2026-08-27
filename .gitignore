@@ -1,0 +1,43 @@
+.venv/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+.DS_Store
+.Rhistory
+.pytest_cache/
+.ruff_cache/
+
+# Local secrets and credentials
+.streamlit/secrets.toml
+*.pem
+*.key
+
+# Local databases and runtime state
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+data/
+
+# Local tooling and release staging
+.agents/
+.claude/
+.codex/
+.idea/
+.vscode/
+.coverage
+htmlcov/
+*.log
+.release/
+backups/
+outputs/
+tmp/
+work/
+docx_work/
+可比公司研发_工作文件/
+*.docx
+*.pdf

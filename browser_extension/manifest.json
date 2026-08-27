@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "求职助手一键收录",
+  "version": "1.6.0",
+  "description": "把当前小红书、BOSS 或实习僧岗位收录到本机求职助手。",
+  "permissions": ["activeTab", "scripting", "storage", "tabs"],
+  "host_permissions": ["http://127.0.0.1:8765/*"],
+  "action": {
+    "default_title": "加入求职助手",
+    "default_popup": "popup.html"
+  }
+}

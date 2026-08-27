@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>加入求职助手</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main>
+      <header>
+        <span class="eyebrow">CAREER OS</span>
+        <h1>加入求职助手</h1>
+        <p id="pageSummary">正在识别岗位正文、发布时间和页面来源……</p>
+      </header>
+
+      <label for="decision">我的初步判断</label>
+      <select id="decision">
+        <option value="准备投递">准备投递</option>
+        <option value="继续了解" selected>继续了解</option>
+        <option value="暂不投递">暂不投递</option>
+        <option value="信息待补全">信息待补全</option>
+      </select>
+
+      <details id="pairingPanel">
+        <summary>首次使用：填写配对码</summary>
+        <label for="token">配对码</label>
+        <input id="token" type="password" autocomplete="off" placeholder="从求职助手复制">
+        <button id="saveToken" class="secondary">保存配对码</button>
+      </details>
+
+      <button id="capture" class="primary" disabled>收录当前岗位</button>
+      <button id="openAssistant" class="link">打开求职助手</button>
+      <p id="status" role="status"></p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
