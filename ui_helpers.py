@@ -47,67 +47,6 @@ def apply_global_styles() -> None:
             padding-top: 1rem;
         }
 
-        .st-key-primary_navigation {
-            position: sticky;
-            top: 0;
-            z-index: 990;
-            padding: 0.5rem 0 0.62rem;
-            margin-bottom: 3.25rem;
-            border-bottom: 1px solid var(--career-line);
-            background: var(--career-paper);
-        }
-
-        .st-key-primary_navigation [data-testid="stPageLink"] {
-            flex: 1 1 0;
-            min-width: 112px;
-        }
-
-        .st-key-primary_navigation [class*="st-key-primary_nav_item_"] {
-            flex: 1 1 0;
-            min-width: 112px;
-        }
-
-        .st-key-primary_navigation [data-testid="stPageLink"] a {
-            min-height: 36px;
-            justify-content: flex-start;
-            padding: 0.4rem 0.7rem;
-            border-radius: 4px;
-            border-color: transparent;
-            background: transparent;
-            color: var(--career-ink);
-            font-size: 0.82rem;
-            font-weight: 560;
-            letter-spacing: 0.01em;
-            white-space: nowrap;
-        }
-
-        .st-key-primary_navigation [data-testid="stPageLink"] a p {
-            color: inherit !important;
-        }
-
-        .st-key-primary_navigation [data-testid="stPageLink"] a:hover {
-            border-color: transparent;
-            background: #e9e5dc;
-            color: var(--career-ink);
-        }
-
-        .st-key-primary_navigation [class*="st-key-primary_nav_item_"][class*="_active"] a {
-            border-color: transparent;
-            background: var(--career-ink);
-            color: #ffffff !important;
-        }
-
-        .st-key-primary_navigation [class*="st-key-primary_nav_item_"][class*="_active"] a *,
-        .st-key-primary_navigation [data-testid="stPageLink"] a[aria-current="page"] * {
-            color: #ffffff !important;
-            fill: #ffffff !important;
-        }
-
-        .st-key-primary_navigation [data-testid="stPageLink"] a[aria-current="page"] {
-            background: var(--career-ink) !important;
-            color: #ffffff !important;
-        }
-
         .st-key-page_heading {
             max-width: 980px;
             margin-bottom: 3.4rem;
@@ -292,20 +231,6 @@ def apply_global_styles() -> None:
                 padding-top: 0.75rem;
             }
 
-            .st-key-primary_navigation {
-                position: static;
-                overflow-x: auto;
-                justify-content: flex-start;
-                margin-bottom: 2.2rem;
-            }
-
-            .st-key-primary_navigation [data-testid="stPageLink"] {
-                flex: 0 0 112px;
-            }
-
-            .st-key-primary_navigation [class*="st-key-primary_nav_item_"] {
-                flex: 0 0 112px;
-            }
         }
         </style>
         """

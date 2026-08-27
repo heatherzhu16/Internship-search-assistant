@@ -107,23 +107,27 @@ evaluation_set_page = st.Page(
 )
 
 navigation = st.navigation(
-    [
-        discovery_page,
-        analysis_page,
-        materials_page,
-        ledger_page,
-        dashboard_page,
-        rubric_page,
-        resumes_page,
-        history_page,
-        sync_page,
-        evaluation_set_page,
-    ],
-    position="hidden",
+    {
+        "": [
+            discovery_page,
+            analysis_page,
+            materials_page,
+            ledger_page,
+            dashboard_page,
+        ],
+        "系统工具": [
+            rubric_page,
+            resumes_page,
+            history_page,
+            sync_page,
+            evaluation_set_page,
+        ],
+    },
+    position="top",
 )
 
 with st.sidebar:
-    st.caption("SYSTEM / 06—09")
+    st.caption("SYSTEM / 06—10")
     with st.container(key="toolbox_navigation", gap=None):
         st.page_link(rubric_page, label="06  评分规则", icon=":material/tune:", width="stretch")
         st.page_link(resumes_page, label="07  简历库", icon=":material/folder_open:", width="stretch")
@@ -194,23 +198,5 @@ with st.sidebar:
                 st.toast("已删除钥匙串中的模型配置。")
                 st.rerun()
         st.caption("数据默认仅保存在当前电脑。")
-
-with st.container(
-    key="primary_navigation",
-    horizontal=True,
-    vertical_alignment="center",
-    horizontal_alignment="distribute",
-    gap="small",
-):
-    for page, label, slug in [
-        (discovery_page, "01  岗位决策", "discovery"),
-        (analysis_page, "02  单份 JD", "analysis"),
-        (materials_page, "03  材料生成", "materials"),
-        (ledger_page, "04  投递台账", "ledger"),
-        (dashboard_page, "05  复盘看板", "dashboard"),
-    ]:
-        active_suffix = "_active" if navigation.url_path == page.url_path else ""
-        with st.container(key=f"primary_nav_item_{slug}{active_suffix}"):
-            st.page_link(page, label=label, width="stretch")
 
 navigation.run()
